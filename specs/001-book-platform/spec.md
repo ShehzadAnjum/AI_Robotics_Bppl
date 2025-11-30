@@ -167,35 +167,40 @@ A student wants to access the educational content from any device (desktop, tabl
 
 **Learning Progression:**
 
-- **SC-001**: Students with minimal background successfully complete all foundational chapters and pass self-evaluation questions with 80% or higher accuracy
-- **SC-002**: Students progress from complete beginner to intermediate practitioner capable of designing and implementing small-to-mid robotics systems independently
+- **SC-001**: Students with minimal background successfully complete all foundational chapters (Chapters 1-3) and pass self-evaluation questions with 80% or higher accuracy before progressing to robotics-specific content
+- **SC-002**: By completing the book, 80% of students can independently perform the following intermediate-level tasks (verified via skills assessment and project completion):
+  - Select appropriate sensors for a given robotics application
+  - Design basic motion control algorithms for mobile robots
+  - Implement obstacle avoidance using sensor fusion
+  - Create and test simulation models before hardware implementation
+  - Troubleshoot sensor noise and actuator calibration issues
 - **SC-003**: 90% of students can complete 3-5 small projects independently by mid-book
 - **SC-004**: 80% of students can complete 1-2 mid-size projects independently by late-book
-- **SC-005**: 70% of students successfully complete the integrated project combining multiple concepts
+- **SC-005**: Within 2 weeks of completing the final chapter, 70% of students successfully complete the integrated project combining multiple concepts
 
 **Content Engagement:**
 
 - **SC-006**: Students maintain engagement throughout the book, with less than 20% dropout rate between first and last chapter
-- **SC-007**: Students report that curiosity hooks and driving questions effectively motivated them to continue reading (measured via feedback survey: 80% positive)
-- **SC-008**: Students find the 70% practical / 30% theory balance effective for learning (measured via feedback survey: 85% positive)
+- **SC-007**: Upon completing each chapter, students report via in-chapter survey that curiosity hooks and driving questions effectively motivated them to continue reading (80% positive responses across all chapters)
+- **SC-008**: In the end-of-book survey (completed within 1 week of finishing), students report that the 70% practical / 30% theory balance was effective for learning (85% positive responses)
 
 **Content Quality:**
 
-- **SC-009**: Students report that real-world examples made abstract concepts understandable (measured via feedback survey: 90% positive)
-- **SC-010**: Students with varying backgrounds (electronics, mechanics, programming) all successfully complete foundational chapters and progress to robotics content
-- **SC-011**: Visual diagrams and flows are rated as helpful by students (measured via feedback survey: 85% positive)
+- **SC-009**: In chapter-end surveys, students report that real-world examples made abstract concepts understandable (90% positive responses across all chapters)
+- **SC-010**: 85% of students with varying backgrounds (electronics, mechanics, or programming) successfully complete all foundational chapters within 4 weeks and progress to robotics-specific content, demonstrating that prerequisite knowledge gaps can be bridged for diverse learners
+- **SC-011**: In chapter-end surveys, visual diagrams and flows are rated as helpful by students (85% positive responses across all chapters)
 
 **Accessibility:**
 
 - **SC-012**: Book content loads in under 2 seconds for 95% of users across devices
-- **SC-013**: Book is fully functional and readable on mobile, tablet, and desktop devices
+- **SC-013**: Book passes responsive design testing on iOS, Android, and desktop browsers with 100% of core features (reading, navigation, search, diagrams) functional on all device types
 - **SC-014**: Students can find specific topics via navigation and search in under 30 seconds
 
 **Educational Effectiveness:**
 
 - **SC-015**: Students report increased confidence in Physical AI and Robotics concepts after completing the book (measured via before/after survey: 80% improvement)
 - **SC-016**: Students can explain core terminology and concepts to others after completing the book (measured via self-assessment: 85% confident)
-- **SC-017**: Students feel prepared to continue learning advanced topics after completing the book (measured via survey: 75% positive)
+- **SC-017**: Students feel prepared to continue learning advanced topics after completing the book (measured via end-of-book survey: 75% positive)
 
 ## Assumptions
 
