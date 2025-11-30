@@ -5,6 +5,16 @@
 **Status**: Draft
 **Input**: User description: "Phase 1: Core Book Platform - Interactive Docusaurus-based educational book for Physical AI & Humanoid Robotics with 10-15 chapters following Constitution principles (example-first, practical-first, simulation-first pedagogy). Includes foundational chapters (electronics, mechanics, programming basics) plus robotics-specific content. Each chapter must follow 12-element structure (hook, question, example, use case, teaching, diagrams, expert insights, AI prompts, practice, self-eval, assignment, next hook). Deploy to GitHub Pages. Target audience: complete beginners. Content depth: mid-level (beginner to intermediate). Success: Students complete 3-5 small projects, 1-2 mid-size projects, and 1 integrated project by end."
 
+## Clarifications
+
+### Session 2025-11-30
+
+- Q: ROS2 Requirement Scope - Is ROS2 mandatory for all chapters, optional among simulator options, or introduced gradually? → A: ROS2 mandatory for all robotics chapters (Ch 4+); foundational chapters (Ch 1-3) are ROS2-agnostic
+- Q: AI/ML Implementation Depth - Should students fully implement ML models, use pre-trained models, or only understand concepts? What's the balance between classical and learning-based control? → A: Conceptual ML understanding; students use pre-trained models; primary focus on classical control (PID, MPC); PyTorch optional for advanced learners
+- Q: Operating System and Environment - Which OS is required? Is GPU mandatory? Should content work offline? → A: Cross-platform (Linux/Windows/macOS); GPU optional but recommended for better simulation performance; book readable offline, simulations require online access to ROS2 resources
+- Q: Pedagogical Artifacts and Assessment - Should solutions be provided for exercises and assignments? Are formal assessments included? → A: Self-evaluation only (no solutions); assignments without answers; students must verify via simulation outcomes only; purely self-directed learning model
+- Q: Primary Simulator Choice - Which simulator(s) should be used? Single focus or multiple tools? → A: Gazebo primary (90% of examples); Isaac Sim for optional advanced chapter on GPU-accelerated physics; vendor-neutral concepts emphasized throughout
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Learn Physical AI Foundations (Priority: P1)
@@ -87,6 +97,8 @@ A student wants to access the educational content from any device (desktop, tabl
 - What if a student cannot access simulation environments mentioned in exercises? Each chapter must provide alternative learning activities or clear instructions for accessing free simulation tools.
 - How does content remain engaging for students who lose interest midway? Each chapter's curiosity hook for the next chapter must create compelling anticipation; humor and varied teaching methods maintain engagement.
 - What if diagrams or visual content fail to load? All diagrams should have descriptive captions and be supplemented by text explanations.
+- How do students verify correctness without solution keys? All assignments have simulation-verifiable success criteria (e.g., measurable outcomes like "robot position error <5cm") that students can objectively check. Expert insights and troubleshooting tips guide students toward correct approaches.
+- What if students get stuck on assignments without solutions? Chapter content includes sufficient examples, tips, and common pitfalls to guide problem-solving. Students use simulation feedback to debug and iterate toward correct solutions.
 
 ## Requirements *(mandatory)*
 
@@ -104,6 +116,13 @@ A student wants to access the educational content from any device (desktop, tabl
 **Pedagogical Approach:**
 
 - **FR-007**: Content MUST follow simulation-first progression: simulation environments first, then generic tech stack, then specific hardware
+- **FR-007a**: Robotics-specific chapters (Chapter 4 onwards) MUST use ROS2 as the mandatory framework for all simulation exercises, code examples, and projects
+- **FR-007b**: Foundational chapters (Chapters 1-3: electronics, mechanics, programming basics) MUST be ROS2-agnostic to avoid overwhelming complete beginners with framework complexity
+- **FR-007c**: Chapter 4 MUST include ROS2 introduction and setup instructions before proceeding to robotics-specific concepts
+- **FR-007d**: Gazebo MUST be the primary simulator used in 90% of simulation examples, exercises, and projects due to its accessibility, ROS2 integration, and CPU-friendly operation
+- **FR-007e**: Isaac Sim MAY be covered in one optional advanced chapter for students interested in GPU-accelerated physics simulation; all Isaac Sim content must be clearly marked as optional
+- **FR-007f**: Simulation concepts MUST be taught in vendor-neutral terms (e.g., "physics engine," "sensor simulation," "collision detection") before demonstrating specific Gazebo implementations to prevent tool lock-in
+- **FR-007g**: When Gazebo-specific features are used, the underlying robotics concept MUST be explained first to ensure transferable understanding
 - **FR-008**: Concepts MUST build incrementally from simple to complex with clear prerequisite identification
 - **FR-009**: Every chapter MUST include visual diagrams for abstract concepts with clear labels, legends, and accessible color schemes (color-blind friendly, high contrast)
 - **FR-010**: Tone MUST be soft, polite, lightly humorous, conversational, and encouraging throughout all content
@@ -113,9 +132,13 @@ A student wants to access the educational content from any device (desktop, tabl
 **Learning Assessment:**
 
 - **FR-013**: Each chapter MUST include 3-5 self-evaluation questions at the end of major topic sections
-- **FR-014**: Self-evaluation questions MUST provide topic references for incorrect answers to guide students back to relevant content
-- **FR-015**: Each chapter MUST include a short assignment (30-60 minutes) that applies chapter concepts
-- **FR-016**: Assignments MUST have clear success criteria so students know when they've completed them correctly
+- **FR-013a**: Self-evaluation questions MUST NOT include answer keys or solutions; students verify understanding through topic re-reading and simulation experiments
+- **FR-014**: Self-evaluation questions MUST provide topic references to guide students where to review if uncertain about answers
+- **FR-015**: Each chapter MUST include a short assignment (30-60 minutes) that applies chapter concepts in simulation
+- **FR-016**: Assignments MUST have clear success criteria that can be objectively verified through simulation outcomes (e.g., "robot reaches target position within 5cm" rather than subjective criteria)
+- **FR-016a**: Assignments MUST NOT include solution code or answer keys; students learn through experimentation and simulation feedback
+- **FR-016b**: Assignment instructions MUST provide enough guidance for students to approach the problem without prescribing the exact solution
+- **FR-016c**: No formal assessments, quizzes, or graded evaluations are included; learning is purely self-directed
 
 **Project-Based Learning:**
 
@@ -136,10 +159,26 @@ A student wants to access the educational content from any device (desktop, tabl
 - **FR-025**: Book MUST include navigation features (table of contents, search) for finding specific topics
 - **FR-026**: Book MUST be deployed to a publicly accessible web platform (GitHub Pages)
 
+**AI & Machine Learning Approach:**
+
+- **FR-029**: AI/ML content MUST prioritize conceptual understanding over implementation; students learn what ML can do for robotics without training models from scratch
+- **FR-030**: When ML models are used in exercises or projects, students MUST use pre-trained models with clear instructions for loading and applying them
+- **FR-031**: Control methods MUST emphasize classical approaches (PID controllers, Model Predictive Control, state machines) as the primary techniques taught
+- **FR-032**: Learning-based control (reinforcement learning, imitation learning) MUST be covered conceptually with optional advanced implementation sections for interested students
+- **FR-033**: If PyTorch or TensorFlow are used, they MUST be in clearly marked "Advanced/Optional" sections; core content must not require deep learning frameworks
+
+**Environment & Platform Requirements:**
+
+- **FR-036**: All setup instructions, code examples, and simulation exercises MUST be cross-platform compatible (Linux, Windows, macOS)
+- **FR-037**: ROS2 installation instructions MUST be provided for all three major operating systems with troubleshooting guidance
+- **FR-038**: GPU MUST be optional; all core exercises and projects must run on CPU-only systems with acceptable performance
+- **FR-039**: GPU-accelerated simulations MUST be clearly marked as "Recommended for better performance" with CPU fallback instructions
+- **FR-040**: Book content (text, diagrams, exercises) MUST be readable offline after initial page load; simulation exercises require online access to download ROS2 packages and resources
+
 **Content Quality:**
 
-- **FR-027**: All technical claims, concept explanations, and best practices MUST be validated against at least 3 authoritative sources (peer-reviewed papers, textbooks, official documentation, research institutions, verified practitioners)
-- **FR-028**: Content MUST be suitable for complete beginners with no assumed prerequisites beyond willingness to learn
+- **FR-034**: All technical claims, concept explanations, and best practices MUST be validated against at least 3 authoritative sources (peer-reviewed papers, textbooks, official documentation, research institutions, verified practitioners)
+- **FR-035**: Content MUST be suitable for complete beginners with no assumed prerequisites beyond willingness to learn
 
 ### Key Entities
 
@@ -204,7 +243,7 @@ A student wants to access the educational content from any device (desktop, tabl
 
 ## Assumptions
 
-1. **Simulation Access**: We assume students have access to free simulation tools or that the book will provide clear instructions for accessing such tools. Web-based simulators are preferred to minimize installation barriers.
+1. **Simulation Access**: We assume students have access to Gazebo simulator starting from Chapter 4. Gazebo is the primary simulator used in 90% of examples and is required for all core exercises. The book will provide clear instructions for installing and configuring ROS2 and Gazebo across all platforms (Linux/Windows/macOS). Isaac Sim is optional and covered in one advanced chapter only. Foundational chapters (1-3) use simulation tools that don't require ROS2 or Gazebo.
 
 2. **Internet Connectivity**: We assume students have reliable internet access to view the web-based book and access simulation environments.
 
@@ -213,6 +252,12 @@ A student wants to access the educational content from any device (desktop, tabl
 4. **Language**: Primary content is in English. Students are assumed to have basic English reading comprehension.
 
 5. **Device Access**: Students have access to at least one device (mobile, tablet, or desktop) capable of displaying web content and running basic simulations.
+
+5a. **Operating System**: Students use Linux, Windows, or macOS. All setup instructions and code examples work across these platforms. Windows users may use WSL2 for Linux-based tools.
+
+5b. **GPU Availability**: GPU is optional but recommended for better simulation performance. All core content runs on CPU-only systems. GPU-accelerated features are clearly marked as performance enhancements.
+
+5c. **Offline Access**: Students can read book content offline after initial page load. Simulation exercises require internet access to download ROS2 packages, simulators, and resources during setup and runtime.
 
 6. **Chapter Count**: The final book will contain 12-15 chapters (assumed 3 foundational + 9-12 robotics-specific) based on content scope validation during planning phase.
 
@@ -223,3 +268,9 @@ A student wants to access the educational content from any device (desktop, tabl
 9. **Humor Appropriateness**: "Lightly humorous" tone is culturally appropriate for global audience and doesn't require specific cultural context to understand.
 
 10. **Deployment Platform**: GitHub Pages meets all accessibility, performance, and cost requirements for the platform without requiring complex infrastructure.
+
+11. **AI/ML Scope**: Students are expected to understand ML concepts and use pre-trained models, not train models from scratch. Deep learning framework installation (PyTorch/TensorFlow) is optional for advanced learners only. Classical control methods form the core practical skill set.
+
+12. **Self-Directed Learning**: Students are expected to learn through experimentation and simulation feedback without relying on solution keys. The book provides sufficient guidance, examples, and troubleshooting tips for students to discover correct approaches independently. Simulation outcomes serve as the objective verification method for assignment correctness.
+
+13. **Vendor-Neutral Conceptual Understanding**: While Gazebo is the primary simulator, students are expected to learn underlying robotics concepts (physics simulation, sensor modeling, collision detection) in vendor-neutral terms first. This ensures transferable knowledge that applies to other simulators and real robots, not just Gazebo-specific skills.
