@@ -204,3 +204,70 @@
 #chat-messages::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* Text selection context menu */
+#text-selection-menu {
+  position: absolute;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  display: none;
+  gap: 8px;
+  z-index: 10000;
+  animation: menuFadeIn 0.2s ease;
+}
+
+@keyframes menuFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#text-selection-menu button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+#text-selection-menu button:first-child {
+  background: #007bff;
+  color: white;
+}
+
+#text-selection-menu button:first-child:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+#text-selection-menu button:last-child {
+  background: #28a745;
+  color: white;
+}
+
+#text-selection-menu button:last-child:hover {
+  background: #218838;
+  transform: translateY(-1px);
+}
+
+/* Urdu text styling */
+.urdu-text {
+  font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Alvi Nastaleeq', serif;
+  font-size: 16px;
+  line-height: 2;
+  direction: rtl;
+  text-align: right;
+}
+
+/* Load Urdu font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');

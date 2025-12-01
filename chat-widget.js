@@ -45,9 +45,20 @@
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
         </svg>
       </button>
+      <div id="text-selection-menu">
+        <button id="explain-btn">📖 Explain</button>
+        <button id="translate-urdu-btn">🌐 Translate to Urdu</button>
+      </div>
     `;
 
     document.body.insertAdjacentHTML('beforeend', widgetHTML);
+  }
+
+  // Detect if text contains Urdu characters
+  function containsUrdu(text) {
+    // Urdu Unicode range: U+0600 to U+06FF (Arabic/Urdu script)
+    const urduRegex = /[\u0600-\u06FF]/;
+    return urduRegex.test(text);
   }
 
   // Add message to chat
@@ -55,6 +66,12 @@
     const messagesContainer = document.getElementById('chat-messages');
     const messageDiv = document.createElement('div');
     messageDiv.className = `chat-message chat-message-${role}`;
+
+    // Apply Urdu styling if message contains Urdu text
+    if (containsUrdu(content)) {
+      messageDiv.classList.add('urdu-text');
+    }
+
     messageDiv.textContent = content;
     messagesContainer.appendChild(messageDiv);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -147,31 +164,104 @@
     }
   }
 
-  // Handle text selection and populate chat input
-  function handleTextSelection() {
-    const selectedText = window.getSelection().toString().trim();
-    const input = document.getElementById('chat-input');
+  // Store selected text temporarily
+  let currentSelection = '';
 
-    // Only populate if text is selected and chat input exists
-    if (selectedText && input && selectedText.length > 0 && selectedText.length < 500) {
-      // Format the selected text as a question
-      const formattedText = `Explain this: "${selectedText}"`;
-      input.value = formattedText;
+  // Show text selection menu
+  function showSelectionMenu(x, y, selectedText) {
+    const menu = document.getElementById('text-selection-menu');
+    currentSelection = selectedText;
 
-      // Optional: Open chat widget automatically when text is selected
-      const widget = document.getElementById('ai-chat-widget');
-      const toggle = document.getElementById('chat-toggle');
-      if (!isOpen && widget) {
-        isOpen = true;
-        widget.style.display = 'flex';
-        input.disabled = false;
-        document.getElementById('chat-send').disabled = false;
-        input.focus();
+    // Position menu near selection
+    menu.style.left = x + 'px';
+    menu.style.top = (y - 50) + 'px'; // Position above selection
+    menu.style.display = 'flex';
+  }
 
-        // Move cursor to end of input
-        input.setSelectionRange(input.value.length, input.value.length);
+  // Hide text selection menu
+  function hideSelectionMenu() {
+    const menu = document.getElementById('text-selection-menu');
+    menu.style.display = 'none';
+    currentSelection = '';
+  }
+
+  // Handle text selection and show context menu
+  function handleTextSelection(event) {
+    // Delay to ensure selection is complete
+    setTimeout(() => {
+      const selectedText = window.getSelection().toString().trim();
+
+      // Hide menu if no text selected
+      if (!selectedText || selectedText.length === 0) {
+        hideSelectionMenu();
+        return;
       }
+
+      // Only show menu for reasonable text length
+      if (selectedText.length > 0 && selectedText.length < 500) {
+        // Get selection position
+        const selection = window.getSelection();
+        const range = selection.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+
+        // Show menu near the selection
+        showSelectionMenu(
+          rect.left + (rect.width / 2) - 100, // Center horizontally
+          rect.top + window.scrollY, // Position at selection
+          selectedText
+        );
+      }
+    }, 10);
+  }
+
+  // Handle "Explain" button click
+  function handleExplain() {
+    if (!currentSelection) return;
+
+    const input = document.getElementById('chat-input');
+    const widget = document.getElementById('ai-chat-widget');
+
+    // Format as explanation request
+    input.value = `Explain this: "${currentSelection}"`;
+
+    // Open chat widget if not already open
+    if (!isOpen) {
+      isOpen = true;
+      widget.style.display = 'flex';
+      input.disabled = false;
+      document.getElementById('chat-send').disabled = false;
     }
+
+    input.focus();
+    input.setSelectionRange(input.value.length, input.value.length);
+
+    // Hide menu
+    hideSelectionMenu();
+  }
+
+  // Handle "Translate to Urdu" button click
+  function handleTranslateUrdu() {
+    if (!currentSelection) return;
+
+    const input = document.getElementById('chat-input');
+    const widget = document.getElementById('ai-chat-widget');
+
+    // Format as translation request
+    input.value = `Translate this to Urdu: "${currentSelection}"`;
+
+    // Open chat widget if not already open
+    if (!isOpen) {
+      isOpen = true;
+      widget.style.display = 'flex';
+      input.disabled = false;
+      document.getElementById('chat-send').disabled = false;
+    }
+
+    input.focus();
+    input.setSelectionRange(input.value.length, input.value.length);
+
+    // Hide menu
+    hideSelectionMenu();
   }
 
   // Initialize widget
@@ -184,6 +274,9 @@
     const close = document.getElementById('chat-close');
     const input = document.getElementById('chat-input');
     const sendBtn = document.getElementById('chat-send');
+    const explainBtn = document.getElementById('explain-btn');
+    const translateBtn = document.getElementById('translate-urdu-btn');
+    const selectionMenu = document.getElementById('text-selection-menu');
 
     // Toggle chat
     toggle.addEventListener('click', () => {
@@ -220,9 +313,33 @@
       }
     });
 
+    // Handle Explain button
+    explainBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      handleExplain();
+    });
+
+    // Handle Translate to Urdu button
+    translateBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      handleTranslateUrdu();
+    });
+
     // Listen for text selection on the page
     document.addEventListener('mouseup', handleTextSelection);
     document.addEventListener('touchend', handleTextSelection);
+
+    // Hide menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!selectionMenu.contains(e.target)) {
+        hideSelectionMenu();
+      }
+    });
+
+    // Prevent menu from closing when clicking inside it
+    selectionMenu.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
   }
 
   // Wait for DOM to be ready
