@@ -10,7 +10,7 @@ interface SelfEvalQuestionProps {
  * SelfEvalQuestion component (Element 10)
  * Self-evaluation questions with topic references (NO answer keys)
  */
-export default function SelfEvalQuestion({ question, topicReference, children }: SelfEvalQuestionProps): JSX.Element {
+export default function SelfEvalQuestion({ question, topicReference, children }: SelfEvalQuestionProps): React.ReactElement {
   return (
     <div
       className="self-eval-question"

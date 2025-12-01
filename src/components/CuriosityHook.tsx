@@ -9,7 +9,7 @@ interface CuriosityHookProps {
  * CuriosityHook component (Elements 1 & 12)
  * Creates attention-seeker hooks and next-chapter curiosity hooks
  */
-export default function CuriosityHook({ children, type = 'opening' }: CuriosityHookProps): JSX.Element {
+export default function CuriosityHook({ children, type = 'opening' }: CuriosityHookProps): React.ReactElement {
   return (
     <div
       className={`curiosity-hook curiosity-hook--${type}`}

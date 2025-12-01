@@ -10,7 +10,7 @@ interface AssignmentCardProps {
  * AssignmentCard component (Element 11)
  * Displays short assignments with clear success criteria
  */
-export default function AssignmentCard({ title, children, estimatedTime = '30-60 min' }: AssignmentCardProps): JSX.Element {
+export default function AssignmentCard({ title, children, estimatedTime = '30-60 min' }: AssignmentCardProps): React.ReactElement {
   return (
     <div
       className="assignment-card"

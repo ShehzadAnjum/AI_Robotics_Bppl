@@ -8,7 +8,7 @@ interface DrivingQuestionProps {
  * DrivingQuestion component (Element 2)
  * Displays the central question the chapter answers
  */
-export default function DrivingQuestion({ children }: DrivingQuestionProps): JSX.Element {
+export default function DrivingQuestion({ children }: DrivingQuestionProps): React.ReactElement {
   return (
     <div
       className="driving-question"

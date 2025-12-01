@@ -8,7 +8,7 @@ interface AIPromptCardProps {
  * AIPromptCard component (Element 8)
  * Displays AI learning prompts for deeper understanding
  */
-export default function AIPromptCard({ children }: AIPromptCardProps): JSX.Element {
+export default function AIPromptCard({ children }: AIPromptCardProps): React.ReactElement {
   return (
     <div
       className="ai-prompt-card"
