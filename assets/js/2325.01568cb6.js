@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkrobotics_book_platform=globalThis.webpackChunkrobotics_book_platform||[]).push([[2325],{2325:(o,a,b)=>{b.d(a,{createPacketServices:()=>c.$});var c=b(1477);b(7960)}}]);
