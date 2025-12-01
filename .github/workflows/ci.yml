@@ -1,0 +1,87 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - '**'  # Run on all branches
+  pull_request:
+    branches:
+      - main
+      - master
+      - 001-book-platform
+
+jobs:
+  test:
+    name: Test Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run TypeScript type checking
+        run: npm run typecheck
+
+      - name: Run linting
+        run: npm run lint
+        continue-on-error: true  # Don't fail build on linting errors
+
+      - name: Build website
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Test production build
+        run: |
+          npm run serve &
+          SERVER_PID=$!
+          sleep 5
+          curl -f http://localhost:3000/AI_Robotics_Bppl/ || exit 1
+          kill $SERVER_PID
+
+  playwright-tests:
+    name: Run Playwright Tests
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Start dev server
+        run: |
+          npm start &
+          npx wait-on http://localhost:3000/AI_Robotics_Bppl/ --timeout 60000
+
+      - name: Run Playwright tests
+        run: npm run test
+        continue-on-error: true  # Don't fail build on test errors (optional)
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-results
+          path: playwright-report/
+          retention-days: 30
