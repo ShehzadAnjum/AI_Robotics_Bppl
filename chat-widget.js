@@ -147,6 +147,33 @@
     }
   }
 
+  // Handle text selection and populate chat input
+  function handleTextSelection() {
+    const selectedText = window.getSelection().toString().trim();
+    const input = document.getElementById('chat-input');
+
+    // Only populate if text is selected and chat input exists
+    if (selectedText && input && selectedText.length > 0 && selectedText.length < 500) {
+      // Format the selected text as a question
+      const formattedText = `Explain this: "${selectedText}"`;
+      input.value = formattedText;
+
+      // Optional: Open chat widget automatically when text is selected
+      const widget = document.getElementById('ai-chat-widget');
+      const toggle = document.getElementById('chat-toggle');
+      if (!isOpen && widget) {
+        isOpen = true;
+        widget.style.display = 'flex';
+        input.disabled = false;
+        document.getElementById('chat-send').disabled = false;
+        input.focus();
+
+        // Move cursor to end of input
+        input.setSelectionRange(input.value.length, input.value.length);
+      }
+    }
+  }
+
   // Initialize widget
   function init() {
     loadSession();
@@ -192,6 +219,10 @@
         }
       }
     });
+
+    // Listen for text selection on the page
+    document.addEventListener('mouseup', handleTextSelection);
+    document.addEventListener('touchend', handleTextSelection);
   }
 
   // Wait for DOM to be ready
