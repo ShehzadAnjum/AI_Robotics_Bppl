@@ -10,6 +10,7 @@ import SearchBar from '@theme/SearchBar';
 import NavbarMobileSidebarToggle from '@theme/Navbar/MobileSidebar/Toggle';
 import NavbarLogo from '@theme/Navbar/Logo';
 import NavbarSearch from '@theme/Navbar/Search';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import styles from './styles.module.css';
 
 // Import our custom auth component
@@ -72,8 +73,10 @@ export default function NavbarContent(): JSX.Element {
               <SearchBar />
             </NavbarSearch>
           )}
-          {/* Add our authentication button */}
-          <AuthButton />
+          {/* Add our authentication button - wrapped in BrowserOnly to prevent SSR issues */}
+          <BrowserOnly fallback={<div>...</div>}>
+            {() => <AuthButton />}
+          </BrowserOnly>
         </>
       }
     />
