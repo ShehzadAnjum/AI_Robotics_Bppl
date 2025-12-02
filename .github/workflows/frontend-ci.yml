@@ -1,0 +1,64 @@
+name: Frontend CI
+
+on:
+  push:
+    branches: ['main', 'develop', '001-authentication']
+    paths:
+      - 'src/**'
+      - 'docs/**'
+      - 'docusaurus.config.ts'
+      - 'package.json'
+      - '.github/workflows/frontend-ci.yml'
+  pull_request:
+    branches: ['main', 'develop']
+    paths:
+      - 'src/**'
+      - 'docs/**'
+
+jobs:
+  test:
+    name: Test Frontend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript type check
+        run: npm run typecheck
+
+      - name: Lint code
+        run: npm run lint
+
+      - name: Build Docusaurus
+        run: npm run build
+
+      - name: Run E2E tests
+        run: npm run test
+        if: false  # Skip until auth E2E tests are written
+
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run npm audit
+        run: npm audit --audit-level=high
+        continue-on-error: true

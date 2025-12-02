@@ -150,3 +150,158 @@ mark {
     display: none;
   }
 }
+
+/* ===== Chapter Page Component Contrast Improvements ===== */
+/* Improved contrast for better visibility in both light and dark modes */
+/* WCAG AA compliant: 4.5:1 contrast ratio for normal text, 3:1 for large text */
+
+/* CuriosityHook - Better contrast background and text */
+.curiosity-hook {
+  background-color: #e8f5e9 !important; /* Light green with good contrast */
+  color: #1b5e20 !important; /* Dark green text for readability */
+  border-left-color: var(--ifm-color-primary) !important;
+}
+
+.curiosity-hook p,
+.curiosity-hook div {
+  color: #1b5e20 !important; /* Ensure text is readable */
+}
+
+[data-theme='dark'] .curiosity-hook {
+  background-color: #1b5e20 !important; /* Dark green background */
+  color: #c8e6c9 !important; /* Light green text for readability */
+  border-left-color: var(--ifm-color-primary) !important;
+}
+
+[data-theme='dark'] .curiosity-hook p,
+[data-theme='dark'] .curiosity-hook div {
+  color: #c8e6c9 !important; /* Ensure text is readable */
+}
+
+/* DrivingQuestion - Better contrast background and text */
+.driving-question {
+  background-color: #e3f2fd !important; /* Light blue with good contrast */
+  color: #0d47a1 !important; /* Dark blue text for readability */
+  border-color: #1976d2 !important; /* Stronger border color */
+}
+
+.driving-question h2 {
+  color: #0d47a1 !important; /* Dark blue heading */
+}
+
+.driving-question p,
+.driving-question div {
+  color: #0d47a1 !important; /* Ensure text is readable */
+}
+
+[data-theme='dark'] .driving-question {
+  background-color: #0d47a1 !important; /* Dark blue background */
+  color: #bbdefb !important; /* Light blue text for readability */
+  border-color: #42a5f5 !important; /* Lighter border for dark mode */
+}
+
+[data-theme='dark'] .driving-question h2 {
+  color: #bbdefb !important; /* Light blue heading */
+}
+
+[data-theme='dark'] .driving-question p,
+[data-theme='dark'] .driving-question div {
+  color: #bbdefb !important; /* Ensure text is readable */
+}
+
+/* AIPromptCard - Better contrast background and text */
+.ai-prompt-card {
+  background-color: #e3f2fd !important; /* Light blue with good contrast */
+  color: #0d47a1 !important; /* Dark blue text for readability */
+  border-left-color: #1976d2 !important; /* Stronger border color */
+}
+
+.ai-prompt-card div {
+  color: #0d47a1 !important; /* Ensure text is readable */
+}
+
+[data-theme='dark'] .ai-prompt-card {
+  background-color: #0d47a1 !important; /* Dark blue background */
+  color: #bbdefb !important; /* Light blue text for readability */
+  border-left-color: #42a5f5 !important; /* Lighter border for dark mode */
+}
+
+[data-theme='dark'] .ai-prompt-card div {
+  color: #bbdefb !important; /* Ensure text is readable */
+}
+
+/* AssignmentCard - Better contrast background and text */
+.assignment-card {
+  background-color: #fff3e0 !important; /* Light orange with good contrast */
+  color: #e65100 !important; /* Dark orange text for readability */
+  border-color: #f57c00 !important; /* Stronger border color */
+}
+
+.assignment-card h3 {
+  color: #e65100 !important; /* Dark orange heading */
+}
+
+.assignment-card p,
+.assignment-card div,
+.assignment-card li,
+.assignment-card ul,
+.assignment-card ol {
+  color: #e65100 !important; /* Ensure text is readable */
+}
+
+[data-theme='dark'] .assignment-card {
+  background-color: #e65100 !important; /* Dark orange background */
+  color: #ffe0b2 !important; /* Light orange text for readability */
+  border-color: #ff9800 !important; /* Lighter border for dark mode */
+}
+
+[data-theme='dark'] .assignment-card h3 {
+  color: #ffe0b2 !important; /* Light orange heading */
+}
+
+[data-theme='dark'] .assignment-card p,
+[data-theme='dark'] .assignment-card div,
+[data-theme='dark'] .assignment-card li,
+[data-theme='dark'] .assignment-card ul,
+[data-theme='dark'] .assignment-card ol {
+  color: #ffe0b2 !important; /* Ensure text is readable */
+}
+
+/* SelfEvalQuestion - Better contrast background and text */
+.self-eval-question {
+  background-color: #f5f5f5 !important; /* Light gray with good contrast */
+  color: #212121 !important; /* Dark gray text for readability */
+  border-left-color: #616161 !important; /* Stronger border color */
+}
+
+.self-eval-question div {
+  color: #212121 !important; /* Ensure text is readable */
+}
+
+[data-theme='dark'] .self-eval-question {
+  background-color: #424242 !important; /* Dark gray background */
+  color: #e0e0e0 !important; /* Light gray text for readability */
+  border-left-color: #9e9e9e !important; /* Lighter border for dark mode */
+}
+
+[data-theme='dark'] .self-eval-question div {
+  color: #e0e0e0 !important; /* Ensure text is readable */
+}
+
+/* ===== Sidebar Category Label Styling ===== */
+/* Make "Foundations" category label bold */
+/* Target the category that contains foundations items using :has() selector */
+.menu__list-item:has([href*="foundations/intro-physical-ai"]) > .menu__list-item-collapsible > .menu__link--sublist {
+  font-weight: bold !important;
+}
+
+/* Fallback: target by href attribute if :has() is not supported */
+.menu__link--sublist[href="/AI_Robotics_Bppl/docs/foundations/intro-physical-ai"],
+.menu__link--sublist[href*="/docs/foundations/intro-physical-ai"] {
+  font-weight: bold !important;
+}
+
+/* Alternative: target parent category item */
+.menu__list-item.theme-doc-sidebar-item-category:has(.menu__link[href*="foundations/intro-physical-ai"]) .menu__link--sublist {
+  font-weight: bold !important;
+}

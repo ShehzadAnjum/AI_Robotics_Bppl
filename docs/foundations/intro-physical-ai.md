@@ -1,5 +1,4 @@
 ---
-title: Introduction to Physical AI
 sidebar_position: 1
 ---
 

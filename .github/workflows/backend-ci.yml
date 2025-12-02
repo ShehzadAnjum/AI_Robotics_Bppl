@@ -1,0 +1,89 @@
+name: Backend CI
+
+on:
+  push:
+    branches: ['main', 'develop', '001-authentication']
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-ci.yml'
+  pull_request:
+    branches: ['main', 'develop']
+    paths:
+      - 'backend/**'
+
+jobs:
+  test:
+    name: Test Backend
+    runs-on: ubuntu-latest
+
+    env:
+      NODE_ENV: test
+      DATABASE_URL: postgresql://test:test@localhost:5432/test_db
+      BETTER_AUTH_SECRET: test-secret-key-min-32-characters-long-for-testing
+      BETTER_AUTH_URL: http://localhost:3000
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: backend
+        run: npm ci
+
+      - name: TypeScript type check
+        working-directory: backend
+        run: npm run typecheck
+
+      - name: Lint code
+        working-directory: backend
+        run: npm run lint
+
+      - name: Run unit tests
+        working-directory: backend
+        run: npm run test:unit
+        if: false  # Skip until tests are written
+
+      - name: Run integration tests
+        working-directory: backend
+        run: npm run test:integration
+        if: false  # Skip until tests are written
+
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run npm audit
+        working-directory: backend
+        run: npm audit --audit-level=high
+        continue-on-error: true
