@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkrobotics_book_platform=globalThis.webpackChunkrobotics_book_platform||[]).push([[4921],{1597:o=>{o.exports=JSON.parse('{"name":"@easyops-cn/docusaurus-search-local","id":"default"}')}}]);
