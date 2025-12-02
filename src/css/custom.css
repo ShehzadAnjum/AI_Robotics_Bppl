@@ -28,3 +28,125 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+/* ===== Search Enhancement Styles ===== */
+
+/* Make search bar more prominent in navbar */
+.DocSearch.DocSearch-Button {
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  padding: 0 12px;
+  height: 36px;
+  margin: 0 8px;
+  transition: all 0.2s ease;
+}
+
+.DocSearch.DocSearch-Button:hover {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Search icon styling */
+.DocSearch-Search-Icon {
+  color: var(--ifm-color-primary);
+  width: 18px;
+  height: 18px;
+}
+
+/* Search placeholder text */
+.DocSearch-Button-Placeholder {
+  font-size: 14px;
+  padding: 0 8px;
+}
+
+/* Keyboard shortcut hint styling */
+.DocSearch-Button-Keys {
+  display: flex;
+  gap: 4px;
+  min-width: auto;
+}
+
+.DocSearch-Button-Key {
+  background: var(--ifm-color-emphasis-200);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  box-shadow: inset 0 -2px 0 0 var(--ifm-color-emphasis-300);
+}
+
+/* Search modal enhancements */
+.DocSearch-Modal {
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Search results highlighting */
+.search-result-match {
+  background: var(--ifm-color-warning-light);
+  color: var(--ifm-color-emphasis-900);
+  font-weight: 600;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+[data-theme='dark'] .search-result-match {
+  background: var(--ifm-color-warning-dark);
+  color: var(--ifm-color-emphasis-100);
+}
+
+/* Search results container */
+.aa-List {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Individual search result items */
+.aa-Item {
+  border-radius: 6px;
+  padding: 8px 12px;
+  transition: background 0.15s ease;
+}
+
+.aa-Item:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+/* Search result breadcrumbs */
+.aa-ItemContentBreadcrumbs {
+  font-size: 12px;
+  color: var(--ifm-color-emphasis-600);
+  margin-bottom: 4px;
+}
+
+/* Highlighted text in search results */
+mark {
+  background: var(--ifm-color-primary-lighter);
+  color: var(--ifm-color-emphasis-900);
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+[data-theme='dark'] mark {
+  background: var(--ifm-color-primary-darker);
+  color: var(--ifm-color-emphasis-100);
+}
+
+/* Mobile responsive search */
+@media (max-width: 768px) {
+  .DocSearch.DocSearch-Button {
+    margin: 0 4px;
+    padding: 0 8px;
+  }
+
+  .DocSearch-Button-Placeholder {
+    display: none;
+  }
+
+  .DocSearch-Button-Keys {
+    display: none;
+  }
+}

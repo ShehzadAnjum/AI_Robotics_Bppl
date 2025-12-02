@@ -44,6 +44,48 @@ const config: Config = {
   ],
 
   plugins: [
+    // Local Search Plugin - Provides search functionality with keyboard shortcuts
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        // Index all content: docs, pages, and blog
+        hashed: true,
+
+        // Language settings
+        language: ['en'],
+
+        // Search bar customization
+        indexDocs: true,
+        indexBlog: false,
+        indexPages: true,
+
+        // Search results configuration
+        docsRouteBasePath: '/docs',
+
+        // Highlight search terms in results
+        highlightSearchTermsOnTargetPage: true,
+
+        // Search context length
+        searchResultContextMaxLength: 50,
+
+        // Enable keyboard shortcuts: Ctrl+K or Cmd+K
+        // Also supports Ctrl+F override (configured in theme)
+        searchBarShortcutHint: true,
+
+        // Search everything: titles, headings, content
+        explicitSearchResultPath: true,
+
+        // Search in current page or whole book
+        searchResultLimits: 8,
+
+        // Include tags and keywords in search
+        ignoreFiles: [],
+
+        // Remove search index from production build
+        removeDefaultStopWordFilter: false,
+      },
+    ],
+
     // PWA plugin temporarily disabled for testing - re-enable in production
     // [
     //   '@docusaurus/plugin-pwa',
@@ -126,7 +168,7 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
       additionalLanguages: ['python', 'bash', 'yaml'],
     },
-    algolia: undefined, // TODO: Configure Algolia search in future
+    // Using local search plugin instead of Algolia for better offline support
   } satisfies Preset.ThemeConfig,
 };
 
