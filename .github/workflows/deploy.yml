@@ -3,9 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - 001-book-platform  # Deploy when pushing to feature branch
-      - main               # Deploy when pushing to main
-      - master             # Deploy when pushing to master
+      - 001-book-platform   # Deploy when pushing to feature branch
+      - 001-authentication  # Deploy authentication feature branch
+      - main                # Deploy when pushing to main
+      - master              # Deploy when pushing to master
 
   # Allows manual triggering from Actions tab
   workflow_dispatch:
