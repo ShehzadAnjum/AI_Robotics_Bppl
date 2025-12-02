@@ -4,7 +4,7 @@
 
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = 'http://localhost:3000/robotics_book';
+const BASE_URL = 'http://localhost:3000/AI_Robotics_Bppl';
 
 test('Chapter 3: Final verification - No errors', async ({ page }) => {
   const consoleErrors: string[] = [];

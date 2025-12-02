@@ -4,7 +4,7 @@
 
 import { test } from '@playwright/test';
 
-const BASE_URL = 'http://localhost:3000/robotics_book';
+const BASE_URL = 'http://localhost:3000/AI_Robotics_Bppl';
 
 test('Capture Mermaid errors in Chapter 3', async ({ page }) => {
   const consoleErrors: string[] = [];
