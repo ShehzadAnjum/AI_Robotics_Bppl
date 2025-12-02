@@ -28,7 +28,6 @@ export const {
   signUp,
   signOut,
   useSession,
-  useActiveOrganization,
 } = authClient;
 
 // Helper to check if user is authenticated
