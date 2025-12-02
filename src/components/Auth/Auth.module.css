@@ -1,0 +1,339 @@
+/* Auth Buttons Container */
+.authButtons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.authLoading {
+  padding: 0.5rem 1rem;
+  color: var(--ifm-color-primary);
+  font-size: 0.9rem;
+}
+
+/* Sign In Button - Outline style */
+.signInBtn {
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--ifm-color-primary);
+  background: transparent;
+  color: var(--ifm-color-primary);
+  border-radius: 0.375rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.signInBtn:hover {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+/* Sign Up Button - Filled style */
+.signUpBtn {
+  padding: 0.4rem 1rem;
+  border: none;
+  background: var(--ifm-color-primary);
+  color: white;
+  border-radius: 0.375rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.signUpBtn:hover {
+  background: var(--ifm-color-primary-dark);
+}
+
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal Content */
+.modalContent {
+  background: var(--ifm-background-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  max-width: 28rem;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal Header */
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.modalHeader h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--ifm-color-emphasis-600);
+  cursor: pointer;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  transition: all 0.2s;
+}
+
+.closeBtn:hover {
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-emphasis-800);
+}
+
+/* Auth Form */
+.authForm {
+  padding: 1.5rem;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.formGroup input {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  transition: border-color 0.2s;
+}
+
+.formGroup input:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 3px var(--ifm-color-primary-lightest);
+}
+
+/* Error Message */
+.error {
+  padding: 0.75rem;
+  background: #fee2e2;
+  color: #991b1b;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+[data-theme='dark'] .error {
+  background: #7f1d1d;
+  color: #fecaca;
+}
+
+/* Submit Button */
+.submitBtn {
+  width: 100%;
+  padding: 0.625rem;
+  background: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--ifm-color-primary-dark);
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Switch Auth Link */
+.switchAuth {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.linkBtn {
+  background: none;
+  border: none;
+  color: var(--ifm-color-primary);
+  cursor: pointer;
+  font-weight: 500;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.linkBtn:hover {
+  color: var(--ifm-color-primary-dark);
+}
+
+/* User Menu */
+.userMenu {
+  position: relative;
+}
+
+.userAvatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 2px solid var(--ifm-color-primary);
+  background: var(--ifm-color-primary);
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  overflow: hidden;
+}
+
+.userAvatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 3px var(--ifm-color-primary-lightest);
+}
+
+.userAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* User Dropdown */
+.userDropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  min-width: 12rem;
+  z-index: 1000;
+  animation: slideDown 0.2s;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.userInfo {
+  padding: 0.75rem;
+}
+
+.userName {
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.userEmail {
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-600);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdownDivider {
+  height: 1px;
+  background: var(--ifm-color-emphasis-200);
+  margin: 0.25rem 0;
+}
+
+.dropdownItem {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: var(--ifm-font-color-base);
+  transition: background 0.2s;
+}
+
+.dropdownItem:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+/* Responsive */
+@media (max-width: 996px) {
+  .modalContent {
+    width: 95%;
+    max-height: 95vh;
+  }
+
+  .authButtons {
+    gap: 0.375rem;
+  }
+
+  .signInBtn,
+  .signUpBtn {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.85rem;
+  }
+}

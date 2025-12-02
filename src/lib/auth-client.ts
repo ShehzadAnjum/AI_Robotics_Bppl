@@ -7,7 +7,7 @@ const getBackendUrl = () => {
     // Production: Use environment variable or fallback to deployed backend
     if (window.location.hostname.includes('github.io')) {
       // GitHub Pages production - use deployed Vercel backend
-      return process.env.REACT_APP_BACKEND_URL || 'https://robotics-book-chat-api.vercel.app';
+      return process.env.REACT_APP_BACKEND_URL || 'https://airobobookmagic.vercel.app';
     }
   }
 
