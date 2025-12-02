@@ -49,6 +49,20 @@
         <button id="explain-btn">📖 Explain</button>
         <button id="translate-urdu-btn">🌐 Translate to Urdu</button>
       </div>
+      <div id="translation-popup">
+        <div class="translation-modal">
+          <div class="translation-header">
+            <h3>🌐 Urdu Translation</h3>
+            <button class="translation-close" id="translation-close-btn">&times;</button>
+          </div>
+          <div class="translation-content" id="translation-content">
+            <div class="translation-loading">
+              <div class="translation-spinner"></div>
+              <p>Translating...</p>
+            </div>
+          </div>
+        </div>
+      </div>
     `;
 
     document.body.insertAdjacentHTML('beforeend', widgetHTML);
@@ -239,29 +253,96 @@
     hideSelectionMenu();
   }
 
+  // Show translation popup
+  function showTranslationPopup() {
+    const popup = document.getElementById('translation-popup');
+    popup.classList.add('show');
+  }
+
+  // Hide translation popup
+  function hideTranslationPopup() {
+    const popup = document.getElementById('translation-popup');
+    popup.classList.remove('show');
+  }
+
+  // Show translation loading state
+  function showTranslationLoading() {
+    const content = document.getElementById('translation-content');
+    content.innerHTML = `
+      <div class="translation-loading">
+        <div class="translation-spinner"></div>
+        <p>Translating...</p>
+      </div>
+    `;
+  }
+
+  // Show translation result
+  function showTranslationResult(originalText, urduText) {
+    const content = document.getElementById('translation-content');
+    content.innerHTML = `
+      <div class="translation-section">
+        <div class="translation-label">Original Text</div>
+        <div class="translation-text">${originalText}</div>
+      </div>
+      <div class="translation-section">
+        <div class="translation-label">اردو ترجمہ (Urdu Translation)</div>
+        <div class="translation-urdu">${urduText}</div>
+      </div>
+    `;
+  }
+
+  // Show translation error
+  function showTranslationError(error) {
+    const content = document.getElementById('translation-content');
+    content.innerHTML = `
+      <div class="translation-error">
+        <strong>Translation Error</strong><br>
+        ${error}
+      </div>
+    `;
+  }
+
   // Handle "Translate to Urdu" button click
-  function handleTranslateUrdu() {
+  async function handleTranslateUrdu() {
     if (!currentSelection) return;
 
-    const input = document.getElementById('chat-input');
-    const widget = document.getElementById('ai-chat-widget');
-
-    // Format as translation request
-    input.value = `Translate this to Urdu: "${currentSelection}"`;
-
-    // Open chat widget if not already open
-    if (!isOpen) {
-      isOpen = true;
-      widget.style.display = 'flex';
-      input.disabled = false;
-      document.getElementById('chat-send').disabled = false;
-    }
-
-    input.focus();
-    input.setSelectionRange(input.value.length, input.value.length);
-
-    // Hide menu
+    // Hide selection menu
     hideSelectionMenu();
+
+    // Show popup with loading state
+    showTranslationPopup();
+    showTranslationLoading();
+
+    try {
+      // Call translation API
+      const response = await fetch('https://airobobookmagic.vercel.app/api/translate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text: currentSelection,
+          targetLanguage: 'urdu'
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      // Show translation result
+      showTranslationResult(currentSelection, data.translation);
+
+    } catch (error) {
+      console.error('Translation error:', error);
+      showTranslationError(error.message || 'Failed to translate. Please try again.');
+    }
   }
 
   // Initialize widget
@@ -277,6 +358,8 @@
     const explainBtn = document.getElementById('explain-btn');
     const translateBtn = document.getElementById('translate-urdu-btn');
     const selectionMenu = document.getElementById('text-selection-menu');
+    const translationPopup = document.getElementById('translation-popup');
+    const translationCloseBtn = document.getElementById('translation-close-btn');
 
     // Toggle chat
     toggle.addEventListener('click', () => {
@@ -338,6 +421,24 @@
 
     // Prevent menu from closing when clicking inside it
     selectionMenu.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Close translation popup
+    translationCloseBtn.addEventListener('click', () => {
+      hideTranslationPopup();
+    });
+
+    // Close translation popup when clicking outside
+    translationPopup.addEventListener('click', (e) => {
+      if (e.target === translationPopup) {
+        hideTranslationPopup();
+      }
+    });
+
+    // Prevent closing when clicking inside modal
+    const translationModal = translationPopup.querySelector('.translation-modal');
+    translationModal.addEventListener('click', (e) => {
       e.stopPropagation();
     });
   }
