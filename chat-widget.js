@@ -306,6 +306,16 @@
   async function handleTranslateUrdu() {
     if (!currentSelection) return;
 
+    // Trim the selected text
+    const textToTranslate = currentSelection.trim();
+
+    // Check if text is empty after trimming
+    if (!textToTranslate) {
+      showTranslationPopup();
+      showTranslationError('Please select some text to translate.');
+      return;
+    }
+
     // Hide selection menu
     hideSelectionMenu();
 
@@ -321,7 +331,7 @@
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          text: currentSelection,
+          text: textToTranslate,
           targetLanguage: 'urdu'
         })
       });
@@ -337,7 +347,7 @@
       }
 
       // Show translation result
-      showTranslationResult(currentSelection, data.translation);
+      showTranslationResult(textToTranslate, data.translation);
 
     } catch (error) {
       console.error('Translation error:', error);
