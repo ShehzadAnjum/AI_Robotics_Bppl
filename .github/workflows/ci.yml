@@ -69,14 +69,10 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
-      - name: Start dev server
-        run: |
-          npm start &
-          npx wait-on http://localhost:3000/AI_Robotics_Bppl/ --timeout 60000
-
       - name: Run Playwright tests
         run: npm run test
         continue-on-error: true  # Don't fail build on test errors (optional)
+        # Note: Playwright config handles starting the dev server automatically
 
       - name: Upload test results
         if: always()
