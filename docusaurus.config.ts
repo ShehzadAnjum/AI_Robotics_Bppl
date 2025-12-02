@@ -117,6 +117,19 @@ const config: Config = {
     // ],
   ],
 
+  scripts: [
+    // AI Chat Widget
+    {
+      src: '/AI_Robotics_Bppl/chat-widget.js',
+      async: true,
+    },
+  ],
+
+  stylesheets: [
+    // AI Chat Widget CSS
+    '/AI_Robotics_Bppl/chat-widget.css',
+  ],
+
   themeConfig: {
     image: 'img/social-card.png',
     navbar: {
