@@ -33,8 +33,11 @@ export default function SignUpModal({ onClose, onSwitchToSignIn }: SignUpModalPr
         onClose();
         window.location.reload();
       }
-    } catch (err) {
-      setError('An unexpected error occurred');
+    } catch (err: any) {
+      // Extract error message from the response
+      const errorMessage = err?.message || err?.error?.message || 'An unexpected error occurred';
+      setError(errorMessage);
+      console.error('Signup error:', err);
     } finally {
       setIsLoading(false);
     }
