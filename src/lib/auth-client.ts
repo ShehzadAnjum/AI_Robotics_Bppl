@@ -1,18 +1,19 @@
 import { createAuthClient } from 'better-auth/react';
 
-// Get backend URL from environment or use defaults
+// Get backend URL based on environment
 const getBackendUrl = () => {
   // Check if running in browser
   if (typeof window !== 'undefined') {
-    // Production: Use environment variable or fallback to deployed backend
+    // Production: GitHub Pages → Vercel backend
     if (window.location.hostname.includes('github.io')) {
-      // GitHub Pages production - use deployed Vercel backend
-      return process.env.REACT_APP_BACKEND_URL || 'https://airobobookmagic.vercel.app';
+      return 'https://airobobookmagic.vercel.app';
     }
+    // Development: Local backend
+    return 'http://localhost:3000';
   }
 
-  // Development: Local backend
-  return process.env.REACT_APP_BACKEND_URL || 'http://localhost:3000';
+  // SSR fallback (shouldn't be reached due to BrowserOnly wrapper)
+  return 'http://localhost:3000';
 };
 
 // Create better-auth client for React
