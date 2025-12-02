@@ -6,7 +6,7 @@
     "jsx": "react",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["@docusaurus/module-type-aliases", "@docusaurus/theme-classic"]
+    "types": ["@docusaurus/module-type-aliases", "@docusaurus/theme-classic", "react", "react-dom"]
   },
   "exclude": [".docusaurus", "build"]
 }
